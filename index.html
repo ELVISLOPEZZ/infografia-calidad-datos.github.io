@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de la Calidad de los Datos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark:   #0a3d2e;
+    --green-mid:    #145a3c;
+    --green-main:   #1e8a58;
+    --green-light:  #2dba7a;
+    --green-soft:   #a8e6c8;
+    --green-pale:   #e6f7ef;
+    --accent-gold:  #f0c040;
+    --accent-lime:  #82e06a;
+    --white:        #ffffff;
+    --off-white:    #f4faf7;
+    --text-dark:    #0d2a1f;
+    --text-mid:     #2c5840;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  .infographic {
+    width: 900px;
+    margin: 0 auto;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ───── HEADER ───── */
+  .header {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 50%, var(--green-main) 100%);
+    padding: 52px 52px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 360px; height: 160px;
+    border-radius: 50%;
+    background: rgba(45,186,122,0.15);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 46px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 span { color: var(--accent-gold); }
+  .header-sub {
+    margin-top: 14px;
+    color: var(--green-soft);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-deco {
+    position: absolute;
+    right: 52px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px; height: 100px;
+    z-index: 1;
+  }
+  .header-deco svg { width: 100%; height: 100%; }
+
+  /* ───── SECTION LABEL ───── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .section-label .num {
+    width: 32px; height: 32px;
+    background: var(--green-main);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-label h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green-light), transparent);
+  }
+
+  /* ───── DEFINICION ───── */
+  .def-block {
+    padding: 36px 52px;
+    background: var(--green-pale);
+    border-left: 6px solid var(--green-light);
+    position: relative;
+  }
+  .def-quote {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-mid);
+  }
+  .def-quote strong {
+    color: var(--green-dark);
+    font-weight: 600;
+  }
+  .def-tag {
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--green-main);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* ───── MAIN CONTENT ───── */
+  .content-wrap {
+    padding: 36px 52px;
+  }
+
+  /* ───── DIMENSIONES GRID ───── */
+  .dim-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .dim-card {
+    background: var(--green-pale);
+    border-radius: 12px;
+    padding: 16px 14px;
+    border-top: 4px solid var(--green-light);
+    transition: transform .2s;
+  }
+  .dim-card:hover { transform: translateY(-3px); }
+  .dim-card .icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .dim-card h3 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .dim-card p {
+    font-size: 11.5px;
+    color: var(--text-mid);
+    line-height: 1.55;
+  }
+  .dim-card.accent { border-top-color: var(--accent-gold); background: #fffbea; }
+
+  /* ───── TWO-COL ───── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+
+  /* ───── PROCESS STEPS ───── */
+  .steps-block { background: var(--green-pale); border-radius: 14px; padding: 24px; }
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .step-row:last-child { margin-bottom: 0; }
+  .step-dot {
+    width: 28px; height: 28px;
+    background: var(--green-main);
+    border-radius: 50%;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-text h4 {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .step-text p { font-size: 11.5px; color: var(--text-mid); line-height: 1.5; }
+
+  /* ───── ASEGURAMIENTO ───── */
+  .aseg-block { background: var(--green-dark); border-radius: 14px; padding: 24px; }
+  .aseg-block .section-label h2 { color: var(--green-soft); }
+  .aseg-block .section-label .num { background: var(--green-light); }
+  .aseg-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 9px;
+    border-left: 3px solid var(--green-light);
+  }
+  .aseg-item:last-child { margin-bottom: 0; }
+  .aseg-icon { font-size: 20px; flex-shrink: 0; }
+  .aseg-text h4 {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .aseg-text p { font-size: 11.5px; color: var(--green-soft); line-height: 1.5; }
+
+  /* ───── IMPORTANCIA ───── */
+  .imp-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .imp-card {
+    text-align: center;
+    padding: 20px 14px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 2px solid var(--green-soft);
+    position: relative;
+  }
+  .imp-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--green-pale) 0%, transparent 60%);
+  }
+  .imp-card .ic { font-size: 28px; margin-bottom: 10px; position: relative; }
+  .imp-card h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    position: relative;
+  }
+  .imp-card p { font-size: 11px; color: var(--text-mid); line-height: 1.5; position: relative; }
+
+  /* ───── EJEMPLO ───── */
+  .ejemplo-block {
+    background: linear-gradient(135deg, var(--green-mid) 0%, var(--green-dark) 100%);
+    border-radius: 14px;
+    padding: 28px 30px;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .ejemplo-icon-wrap {
+    background: rgba(255,255,255,0.1);
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+  .ejemplo-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+  }
+  .ejemplo-content p {
+    font-size: 12.5px;
+    color: var(--green-soft);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+  .ejemplo-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ───── FOOTER ───── */
+  .footer {
+    background: var(--green-dark);
+    padding: 20px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer p { font-size: 10.5px; color: var(--green-soft); letter-spacing: 0.5px; }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--accent-gold);
+    font-weight: 700;
+  }
+
+  /* ───── FULL-WIDTH SECTION WRAPPER ───── */
+  .full-section { padding: 0 52px 32px; }
+  .section-sep {
+    height: 1px;
+    background: linear-gradient(90deg, var(--green-soft), transparent);
+    margin: 0 52px 28px;
+  }
+</style>
+</head>
+<body>
+<div class="infographic">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <div class="badge">Gestión de Datos · Infografía Universitaria</div>
+    <h1>Gestión de la <span>Calidad</span><br>de los Datos</h1>
+    <p class="header-sub">Conceptos clave, dimensiones, procesos y buenas prácticas</p>
+    <div class="header-deco">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+        <circle cx="50" cy="50" r="35" stroke="rgba(45,186,122,0.35)" stroke-width="2"/>
+        <circle cx="50" cy="50" r="20" fill="rgba(45,186,122,0.15)" stroke="rgba(45,186,122,0.5)" stroke-width="1.5"/>
+        <path d="M50 20 L50 80 M20 50 L80 50" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <path d="M29 29 L71 71 M71 29 L29 71" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+        <circle cx="50" cy="50" r="4" fill="rgba(240,192,64,0.9)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ═══ DEFINICIÓN ═══ -->
+  <div class="def-block">
+    <div class="section-label" style="margin-bottom:12px;">
+      <div class="num">1</div>
+      <h2>¿Qué es la Calidad de los Datos?</h2>
+    </div>
+    <p class="def-quote">
+      La <strong>gestión de la calidad de los datos</strong> es el conjunto de procesos, políticas y tecnologías que garantizan que los datos sean <strong>correctos, completos, confiables y útiles</strong> para quienes los necesitan. Un dato de calidad es aquel que cumple con los requisitos para los que fue recopilado, permitiendo tomar decisiones acertadas.
+    </p>
+    <span class="def-tag">DATO DE CALIDAD = Confiable + Oportuno + Pertinente + Accesible</span>
+  </div>
+
+  <!-- ═══ DIMENSIONES ═══ -->
+  <div class="content-wrap" style="padding-bottom: 0;">
+    <div class="section-label">
+      <div class="num">2</div>
+      <h2>Dimensiones de la Calidad</h2>
+      <div class="divider-line"></div>
+    </div>
+    <div class="dim-grid">
+      <div class="dim-card">
+        <div class="icon">🎯</div>
+        <h3>Exactitud</h3>
+        <p>Los datos reflejan fielmente la realidad. Ej.: el precio de un producto coincide con el precio real.</p>
+      </div>
+      <div class="dim-card">
+        <div class="icon">🧩</div>
+        <h3>Integridad</h3>
+        <p>Los datos están completos y sin valores faltantes críticos. No hay campos vacíos donde debería haber información.</p>
+      </div>
+      <div class="dim-card">
+        <div class="icon">⏰</div>
+        <h3>Disponibilidad</h3>
+        <p>Los datos pueden ser consultados cuando se necesiten, sin interrupciones ni demoras.</p>
+      </div>
+      <div class="dim-card accent">
+        <div class="icon">🔒</div>
+        <h3>Confidencialidad</h3>
+        <p>Solo personas autorizadas pueden acceder a datos sensibles. Se protege la privacidad.</p>
+      </div>
+      <div class="dim-card">
+        <div class="icon">💡</div>
+        <h3>Utilidad</h3>
+        <p>Los datos sirven efectivamente para el propósito previsto y apoyan la toma de decisiones.</p>
+      </div>
+      <div class="dim-card">
+        <div class="icon">🚪</div>
+        <h3>Accesibilidad</h3>
+        <p>Los usuarios autorizados pueden recuperar los datos con facilidad y en el formato adecuado.</p>
+      </div>
+      <div class="dim-card">
+        <div class="icon">📌</div>
+        <h3>Pertinencia</h3>
+        <p>Los datos recopilados son relevantes para el contexto o proceso en que se utilizan.</p>
+      </div>
+      <div class="dim-card accent">
+        <div class="icon">🖥️</div>
+        <h3>Usabilidad</h3>
+        <p>Los datos son fáciles de interpretar, están bien documentados y se presentan de forma clara.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══ VERIFICACIÓN + ASEGURAMIENTO ═══ -->
+  <div class="full-section">
+    <div class="two-col">
+
+      <!-- Verificación -->
+      <div class="steps-block">
+        <div class="section-label">
+          <div class="num">3</div>
+          <h2>Verificación</h2>
+        </div>
+        <div class="step-row">
+          <div class="step-dot">A</div>
+          <div class="step-text">
+            <h4>Auditoría de datos</h4>
+            <p>Revisión periódica para detectar errores, inconsistencias o datos desactualizados.</p>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-dot">B</div>
+          <div class="step-text">
+            <h4>Validación en entrada</h4>
+            <p>Reglas automáticas que rechazan datos incorrectos al momento de registrarlos.</p>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-dot">C</div>
+          <div class="step-text">
+            <h4>Cruce de fuentes</h4>
+            <p>Comparar datos de distintas fuentes para confirmar su veracidad y consistencia.</p>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-dot">D</div>
+          <div class="step-text">
+            <h4>Métricas de calidad</h4>
+            <p>Indicadores como % de completitud o % de errores que miden el estado de los datos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aseguramiento -->
+      <div class="aseg-block">
+        <div class="section-label">
+          <div class="num" style="background:var(--green-light);">4</div>
+          <h2 style="color:var(--green-soft);">Aseguramiento</h2>
+        </div>
+        <div class="aseg-item">
+          <div class="aseg-icon">🔄</div>
+          <div class="aseg-text">
+            <h4>Actualización</h4>
+            <p>Mantener los datos vigentes con revisiones regulares. Reemplazar información obsoleta por datos recientes.</p>
+          </div>
+        </div>
+        <div class="aseg-item">
+          <div class="aseg-icon">📐</div>
+          <div class="aseg-text">
+            <h4>Normalización</h4>
+            <p>Estandarizar formatos (fechas, códigos, nombres) para que todos los datos sigan el mismo criterio.</p>
+          </div>
+        </div>
+        <div class="aseg-item">
+          <div class="aseg-icon">🗑️</div>
+          <div class="aseg-text">
+            <h4>Eliminación de duplicados</h4>
+            <p>Detectar y eliminar registros repetidos que distorsionen los resultados o análisis.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ IMPORTANCIA ═══ -->
+  <div class="section-sep"></div>
+  <div class="full-section">
+    <div class="section-label">
+      <div class="num">5</div>
+      <h2>¿Por qué es Importante?</h2>
+      <div class="divider-line"></div>
+    </div>
+    <div class="imp-row">
+      <div class="imp-card">
+        <div class="ic">📊</div>
+        <h4>Mejores Decisiones</h4>
+        <p>Datos confiables generan análisis precisos y decisiones estratégicas acertadas.</p>
+      </div>
+      <div class="imp-card">
+        <div class="ic">💰</div>
+        <h4>Ahorro de Costos</h4>
+        <p>Errores en datos generan pérdidas. La calidad previene costos por correcciones tardías.</p>
+      </div>
+      <div class="imp-card">
+        <div class="ic">🤝</div>
+        <h4>Confianza del Usuario</h4>
+        <p>Sistemas confiables aumentan la credibilidad de la organización ante clientes y socios.</p>
+      </div>
+      <div class="imp-card">
+        <div class="ic">⚖️</div>
+        <h4>Cumplimiento Legal</h4>
+        <p>Muchas normativas exigen datos precisos y protegidos. La calidad asegura el cumplimiento.</p>
+      </div>
+      <div class="imp-card">
+        <div class="ic">⚡</div>
+        <h4>Eficiencia Operativa</h4>
+        <p>Datos bien gestionados agilizan procesos y eliminan reprocesos costosos.</p>
+      </div>
+      <div class="imp-card">
+        <div class="ic">🔮</div>
+        <h4>Innovación y Análisis</h4>
+        <p>La inteligencia artificial y el Big Data requieren datos de alta calidad como base.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EJEMPLO ═══ -->
+  <div class="section-sep"></div>
+  <div class="full-section">
+    <div class="section-label">
+      <div class="num">6</div>
+      <h2>Ejemplo Práctico</h2>
+      <div class="divider-line"></div>
+    </div>
+    <div class="ejemplo-block">
+      <div class="ejemplo-icon-wrap">🛒</div>
+      <div class="ejemplo-content">
+        <h3>Sistema de Ventas e Inventario</h3>
+        <p>
+          Una tienda maneja miles de productos. Si un artículo tiene precio incorrecto → pérdida económica <strong style="color:var(--accent-gold)">(Exactitud)</strong>. Si el stock no se actualiza → ventas de productos sin existencia <strong style="color:var(--accent-gold)">(Integridad)</strong>. Si dos clientes están registrados dos veces → reportes inflados <strong style="color:var(--accent-gold)">(Duplicados)</strong>. Al normalizar formatos de fecha en facturas → reportes coherentes <strong style="color:var(--accent-gold)">(Normalización)</strong>.
+        </p>
+        <p>
+          Una buena gestión garantiza que el sistema refleje la realidad del negocio en todo momento, permitiendo tomar decisiones acertadas sobre compras, descuentos y logística.
+        </p>
+        <div class="ejemplo-pills">
+          <span class="pill">✓ Precios exactos</span>
+          <span class="pill">✓ Stock actualizado</span>
+          <span class="pill">✓ Sin clientes duplicados</span>
+          <span class="pill">✓ Fechas normalizadas</span>
+          <span class="pill">✓ Reportes confiables</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer">
+    <p>Infografía: Gestión de la Calidad de los Datos · Uso académico</p>
+    <div class="footer-logo">GCD · 2025</div>
+  </div>
+
+</div>
+</body>
+</html>
